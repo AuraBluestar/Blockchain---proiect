@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MySaleToken is ERC20, Ownable {
-    uint256 public tokenPriceWei; 
+    uint256 public tokenPriceWei; // pret pentru 1 token 
 
     constructor(
         string memory name_,
@@ -16,7 +16,6 @@ contract MySaleToken is ERC20, Ownable {
         require(tokenPriceWei_ > 0, "Price must be > 0");
         tokenPriceWei = tokenPriceWei_;
 
-        // supply mare, mintat direct contractului (token sale pool)
         _mint(address(this), initialSupplyWholeTokens * 10 ** decimals());
     }
 

@@ -35,7 +35,6 @@ async function main() {
   console.log("DistributeFunding:", await distribute.getAddress());
   console.log("CrowdFunding:", await crowd.getAddress());
 
-  
   await (await distribute.connect(owner).setFundingSource(await crowd.getAddress())).wait();
 
   

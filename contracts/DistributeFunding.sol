@@ -8,7 +8,6 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract DistributeFunding is Ownable, ReentrancyGuard {
     IERC20 public immutable token;
 
-    // contractul (CrowdFunding) care are voie sa confirme primirea fondurilor
     address public fundingSource;
 
     struct Shareholder {
@@ -63,7 +62,6 @@ contract DistributeFunding is Ownable, ReentrancyGuard {
         emit ShareholderAdded(who, weightBP);
     }
 
-    // se apeleaza DOAR de CrowdFunding (fundingSource), dupa ce tokenii au fost transferati aici
     function notifyFundingReceived() external {
         require(!fundingReceived, "Already notified");
         require(msg.sender == fundingSource, "Only funding source");
@@ -95,7 +93,6 @@ contract DistributeFunding is Ownable, ReentrancyGuard {
         emit Claimed(msg.sender, amount);
     }
 
-    // owner poate retrage restul ramas 
     function withdrawRemainder(address to) external onlyOwner {
         require(fundingReceived, "Funding not received");
         require(to != address(0), "Invalid to");

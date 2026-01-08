@@ -85,13 +85,11 @@ contract CrowdFunding is Ownable, ReentrancyGuard {
 
         ISponsorFunding(sponsorFunding).sponsor(address(this), totalCollected);
 
-        // dupa eventuala sponsorizare va fi finantat (indiferent daca sponsorul a trimis 0)
         state = FundingState.FINANTAT;
 
         emit SponsorFinalized(sponsorFunding);
     }
 
-    // dupa sponsorizare: muta tot la DistributeFunding
     function transferToDistribute(address distributeFunding) external onlyOwner nonReentrant {
         require(state == FundingState.FINANTAT, "Not funded");
         require(!distributed, "Already distributed");
