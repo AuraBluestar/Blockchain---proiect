@@ -46,7 +46,6 @@ contract CrowdFunding is Ownable, ReentrancyGuard {
         return "finantat";
     }
 
-    // contributor trebuie sa faca approve inainte: token.approve(crowd, amount)
     function deposit(uint256 amount) external nonReentrant {
         require(state == FundingState.NEFINANTAT, "Deposits disabled");
         require(amount > 0, "Amount must be > 0");
@@ -77,7 +76,6 @@ contract CrowdFunding is Ownable, ReentrancyGuard {
         emit Withdrawn(msg.sender, amount, totalCollected);
     }
 
-    // doar owner dupa goal: anunta SponsorFunding sa incerce sponsorizarea
     function finalizeAndRequestSponsor(address sponsorFunding) external onlyOwner {
         require(state == FundingState.PREFINANTAT, "Not prefunded");
         require(!sponsorRequested, "Already requested");
@@ -87,7 +85,7 @@ contract CrowdFunding is Ownable, ReentrancyGuard {
 
         ISponsorFunding(sponsorFunding).sponsor(address(this), totalCollected);
 
-        // dupa eventuala sponsorizare => finantat (indiferent daca sponsorul a trimis 0)
+        // dupa eventuala sponsorizare va fi finantat (indiferent daca sponsorul a trimis 0)
         state = FundingState.FINANTAT;
 
         emit SponsorFinalized(sponsorFunding);

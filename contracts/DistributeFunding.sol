@@ -36,7 +36,6 @@ contract DistributeFunding is Ownable, ReentrancyGuard {
         token = IERC20(tokenAddress);
     }
 
-    // setezi o singura data (inainte de primirea fondurilor) contractul CrowdFunding
     function setFundingSource(address source) external onlyOwner {
         require(!fundingReceived, "Already funded");
         require(source != address(0), "Invalid source");
@@ -96,7 +95,7 @@ contract DistributeFunding is Ownable, ReentrancyGuard {
         emit Claimed(msg.sender, amount);
     }
 
-    // optional: owner retrage restul ramas (daca totalWeightBP < 100% sau rotunjiri)
+    // owner poate retrage restul ramas 
     function withdrawRemainder(address to) external onlyOwner {
         require(fundingReceived, "Funding not received");
         require(to != address(0), "Invalid to");

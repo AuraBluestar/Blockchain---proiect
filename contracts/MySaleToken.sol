@@ -5,7 +5,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MySaleToken is ERC20, Ownable {
-    uint256 public tokenPriceWei; // pret pentru 1 token (whole token)
+    uint256 public tokenPriceWei; 
 
     constructor(
         string memory name_,

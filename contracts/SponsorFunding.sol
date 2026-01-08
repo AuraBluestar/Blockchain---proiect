@@ -25,14 +25,12 @@ contract SponsorFunding is Ownable {
         sponsorPercentBP = sponsorPercentBP_;
     }
 
-    // Owner cumpara tokeni pentru sponsorizari (ETH-ul trebuie sa fie exact cat cere token contract)
+    
     function buySponsorTokens(uint256 amountWholeTokens) external payable onlyOwner {
         token.buyTokens{value: msg.value}(amountWholeTokens);
         emit SponsorTokensPurchased(amountWholeTokens, msg.value);
     }
 
-    // Se apeleaza DOAR de catre contractul CrowdFunding (msg.sender trebuie sa fie crowdFunding)
-    // Daca nu sunt suficienti tokeni pentru bonus, NU trimite nimic.
     function sponsor(address crowdFunding, uint256 baseAmount) external {
         require(msg.sender == crowdFunding, "Only CrowdFunding can call");
 
