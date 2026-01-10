@@ -49,3 +49,14 @@ npx hardhat compile
 # ruleaza deploy + demo flow (retea locala simulata)
 npx hardhat run scripts/deployAndDemo.js --network hardhat
 
+pt frontend: 
+npx hardhat run scripts/deploy.js --network sepolia
+copiaza mysaletoken, sponsorFunding si DistributeFunding in adresses.local.json
+apoi dai din folderul frontend npm run dev
+
+1. Iti cumperi tokeni
+2. Creezi un Contract punand adresa primita de crowdFunding si dai add
+3. open si transferi <5 ca sa testezi si withdraw sau 5 pentru a arata finalitatea contractului
+4. in Admin la fundingSource adresa de la CrowdFunding si la add shareHolder pui adresa de sus. Atentie 1000 e 10%. 100% e 10000
+5. Dai finalaze&Request sponsor, apoi Transfer to Distribute si apoi claim
+6. ai tokenii in cont
